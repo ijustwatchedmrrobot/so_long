@@ -3,29 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhademi <muhademi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sozdamar <sozdamar@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 15:26:26 by muhademi          #+#    #+#             */
-/*   Updated: 2024/03/30 03:21:43 by muhademi         ###   ########.fr       */
+/*   Created: 2023/12/01 12:15:45 by sozdamar          #+#    #+#             */
+/*   Updated: 2023/12/01 12:15:47 by sozdamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <unistd.h>
 # include <stdlib.h>
-
+# include <unistd.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10
 # endif
 
-char	*ft_strchr(char *str, int c);
 int		ft_strlen(char *s);
-void	str_part_cpy(char *s1, char *s2, int srci, int len);
+char	*ft_strchr(char *s, char c);
 char	*join(char *s1, char *s2);
-char	*get_line_from_buffer(char *buffer);
+char	*ft_read(int fd, char *buffer);
+char	*ft_line(char *buffer);
+char	*ft_newline(char *buffer);
 char	*get_next_line(int fd);
-char	*clean_buffer(char *buffer);
-
 #endif

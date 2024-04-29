@@ -3,56 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhademi <muhademi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sozdamar <sozdamar@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 01:16:29 by muhademi          #+#    #+#             */
-/*   Updated: 2023/10/27 01:16:29 by muhademi         ###   ########.fr       */
+/*   Created: 2023/10/28 15:01:31 by sozdamar          #+#    #+#             */
+/*   Updated: 2023/10/28 15:01:33 by sozdamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	find_type(char c, va_list *args)
+int	ft_percent(va_list arg, char c)
 {
-	if (c == 's')
-		return (print_str(va_arg(*args, char *)));
+	int	len;
+
+	len = 0;
+	if (c == 'c')
+		len += ft_putchar(va_arg(arg, int));
+	else if (c == 's')
+		len += ft_putstr(va_arg(arg, char *));
 	else if (c == 'd' || c == 'i')
-		return (print_int(va_arg(*args, int)));
-	else if (c == 'c')
-		return (print_char(va_arg(*args, int)));
+		len += ft_putnbr(va_arg(arg, int));
 	else if (c == 'u')
-		return (print_uint(va_arg(*args, unsigned int)));
-	else if (c == 'X' || c == 'x')
-		return (print_hex(va_arg(*args, unsigned int), c));
-	else if (c == 'p' && print_str("0x"))
-		return (print_hex(va_arg(*args, size_t), c) + 2);
+		len += ft_putnbr(va_arg(arg, unsigned int));
+	else if (c == 'x')
+		len += ft_puthex(va_arg(arg, unsigned int), "0123456789abcdef");
+	else if (c == 'X')
+		len += ft_puthex(va_arg(arg, unsigned int), "0123456789ABCDEF");
+	else if (c == 'p')
+	{
+		len += write(1, "0x", 2);
+		len += ft_puthex(va_arg(arg, unsigned long), "0123456789abcdef");
+	}
 	else if (c == '%')
-		return (print_char('%'));
-	return (0);
+		len += ft_putchar('%');
+	return (len);
 }
 
-int	ft_printf(const char *string, ...)
+int	ft_printf(char const *str, ...)
 {
-	int			i;
-	int			len;
-	va_list		args;
+	va_list	args;
+	int		len;
 
-	i = 0;
 	len = 0;
-	va_start(args, string);
-	while (string[i])
+	va_start(args, str);
+	while (*str)
 	{
-		if (string[i] == '%')
+		if (*str == '%')
 		{
-			len += find_type(string[i + 1], &args);
-			i++;
+			len += ft_percent(args, *(str + 1));
+			str++;
 		}
 		else
-		{
-			write(1, &string[i], 1);
-			len++;
-		}
-		i++;
+			len += ft_putchar(*str);
+		str++;
 	}
 	va_end(args);
 	return (len);

@@ -1,26 +1,33 @@
-NAME := so_long
+NAME = so_long
 
-CC := gcc
+CC = gcc
 
-CFLAGS := -Wall -Wextra -Werror -Iheaders/
+CFLAGS = -Wall -Wextra -Werror -Iheaders/
 
-SOURCE := main.c map.c dfs.c images.c
-PRINTF := ft_printf/*c
+SOURCE = main.c map.c dfs.c images.c
+OBJ = ${SOURCE:.c=.o}
+PRINTF := ft_printf/libftprintf.a
 GETNEXTLINE := get_next_line/*c
 LIBRARY := -Lminilibx -lmlx -framework OpenGL -framework AppKit
-MINILIBX := minilibx/
+MINILIBX := minilibx/libmlx.a
 
 
-all:
-	make -C $(MINILIBX)
-	$(CC) $(CFLAGS) $(SOURCE) $(GETNEXTLINE) $(PRINTF) $(LIBRARY) -o $(NAME)
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	@${MAKE} -C ./ft_printf
+	@${MAKE} -C ./minilibx
+	@${CC} ${CFLAGS} $(SOURCE) $(GETNEXTLINE) $(PRINTF) $(LIBRARY) -o $(NAME)
 
 clean:
-
+	@${MAKE} -C ./ft_printf clean
+	@${MAKE} -C ./minilibx clean
+	rm -rf $(OBJ)
 
 fclean: clean
-		make clean -C $(MINILIBX)
-		rm -rf $(NAME)
-
+	@${MAKE} -C ./ft_printf fclean
+	rm -rf $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
