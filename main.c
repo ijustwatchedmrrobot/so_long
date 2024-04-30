@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhademi <muhademi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sozdamar <sozdamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/30 05:13:21 by muhademi          #+#    #+#             */
-/*   Updated: 2024/03/30 11:46:59 by muhademi         ###   ########.fr       */
+/*   Created: 2024/03/30 05:13:21 by sozdamar          #+#    #+#             */
+/*   Updated: 2024/04/30 17:35:25 by sozdamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_error(int num)
 {
 	ft_printf("Error\n");
 	if (num == 0)
-		ft_printf("I just want one map!\n");
+		ft_printf("Not valid number of arguments.\n");
 	else if (num == 1)
 		ft_printf("Length of the walls are not good.\n");
 	else if (num == 2)
@@ -24,19 +24,19 @@ void	ft_error(int num)
 	else if (num == 3)
 		ft_printf("There is not enough coin.\n");
 	else if (num == 4)
-		ft_printf("The map contaion just and exactly one exit!\n");
+		ft_printf("Where is the exit!\n");
 	else if (num == 5)
 		ft_printf("Where is the start position!\n");
 	else if (num == 6)
-		ft_printf("Why there is foreign things???\n");
+		ft_printf("Invalid characters in map.\n");
 	else if (num == 7)
-		ft_printf("Do you think it is possible to arrive finish point???\n");
+		ft_printf("Not possible to reach exit.\n");
 	else if (num == 8)
-		ft_printf("Do you think all the coins are collectable???\n");
+		ft_printf("Not all coins are reachable.\n");
 	else if (num == 9)
-		ft_printf("There is not a map like that!\n");
+		ft_printf("There is not a map like that.\n");
 	else if (num == 10)
-		ft_printf("The extension of file is not .ber!\n");
+		ft_printf("The extension of file is not .ber.\n");
 	exit(0);
 }
 
@@ -44,9 +44,9 @@ void	ft_error2(int num)
 {
 	ft_printf("Error\n");
 	if (num == 0)
-		ft_printf("Images missing!\n");
+		ft_printf("Images missing.\n");
 	else if (num == 1)
-		ft_printf("Empty map!\n");
+		ft_printf("Empty map.\n");
 	exit(0);
 }
 
